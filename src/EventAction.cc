@@ -101,13 +101,13 @@ void EventAction::BeginOfEventAction(const G4Event*)
     << " " << primary->GetMomentum() << G4endl;
 
   // Hodoscope 1
-  G4int n_hit = hHC1->entries();
-  G4cout << "Foram detectados " << n_hit << " elétrons." << G4endl;
-  for (G4int i=0;i<n_hit;i++)
-  {
-    EletronHit* hit = (*hHC1)[i];
-    hit->Print();
-  }
+  // G4int n_hit = hHC1->entries();
+  // G4cout << "Foram detectados " << n_hit << " elétrons." << G4endl;
+  // for (G4int i=0;i<n_hit;i++)
+  // {
+  //   EletronHit* hit = (*hHC1)[i];
+  //   hit->Print();
+  // }
  }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
