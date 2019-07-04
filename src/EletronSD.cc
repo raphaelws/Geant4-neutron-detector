@@ -38,9 +38,6 @@ void EletronSD::Initialize(G4HCofThisEvent* hce)
 G4bool EletronSD::ProcessHits(G4Step* step, G4TouchableHistory*)
 {
 
-G4double edep = step->GetTotalEnergyDeposit();
-    // if (edep==0.) return true;
-
 
 //arquivo onde as informaões dos elétrons são salvas
 std::ofstream eFile ("e-out.txt",std::ofstream::app);
@@ -59,18 +56,23 @@ for (size_t lp=0; lp<(*secondary).size(); lp++) {
         G4String name = (*secondary)[lp]->GetDefinition()->GetParticleName();
         G4ThreeVector momento =(*secondary)[lp]->GetMomentum();
         G4ThreeVector worldPos = (*secondary)[lp]->GetPosition();
-        eFile << name << " " << nome << "\n";
+        //Linha para ver no arquivo se eletrons não estavam sendo produzidos por outros eletrons
+        //eFile << name << " " << nome << "\n";
         //no momento estou pegando TODOS os elétrons apenas para testar
         //caso necessário, é fácil pedir pra ver se o parent track é uma alpha ou um lítio
-        if (name=="e-")
+        if (name=="e-" && nome!= "e-")
         {eFile << worldPos << " " << momento << "\n";
-         //(*secondary)[lp]->SetTrackStatus(fStopAndKill);
+
       }
+         else {step->GetTrack()->SetTrackStatus(fStopAndKill);}
 
 }
 
 
-
+//Confirmei que está funcionando da seguinte forma:
+//-Alterei a aprticula lançada para uma alpha
+//- descomentei a linha 63 e verifiquei no arquivo de saída que apenas os eletrons produzidos por alpha estavam sendo coletados
+//-confirmei se os elétrons estavam realmente sendo "mortos"
 
 //----------------------------------
 

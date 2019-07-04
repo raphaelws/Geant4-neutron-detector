@@ -50,10 +50,11 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   // default particle kinematic
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
   G4String particleName;
+  //LINHA PARA TESTAR A PRODUÇÃO DIRETA DE ELETRONS POR ALPHAS
   // G4ParticleDefinition* particle
   //   = particleTable->FindParticle(particleName="alpha");
   G4ParticleDefinition* particle
-    = particleTable->FindParticle(particleName="neutron");
+    = particleTable->FindParticle(particleName="eletron");
   fParticleGun->SetParticleDefinition(particle);
 
   // particle direction: +Z
@@ -79,7 +80,7 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  G4double posZ = -0.*m;
+  // G4double posZ = -0.*m;
   G4double posY = -0.*m;
   G4double posX = -0.*m;
   // fParticleGun->SetParticlePosition(G4ThreeVector(posX,posY,-0.002*m));
