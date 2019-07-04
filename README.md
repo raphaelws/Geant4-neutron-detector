@@ -1,1 +1,2 @@
-GEM-Detector
+Projeto de iniciação científica realizado no IFUSP e fomentado pela FAPESP sobre detectores do tipo GEM.
+O objetivo é gerar elétrons cuja saída será utilizada no garfield++ para a chuva de elétrons dos GEM e explorar as geometrias do detector em questão de eficiência.
