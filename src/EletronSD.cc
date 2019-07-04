@@ -39,6 +39,10 @@ G4bool EletronSD::ProcessHits(G4Step* step, G4TouchableHistory*)
 {
 
 
+//ATENÇÃO
+//QUANDO VOCÊ EXECUTE O ./B10eletrons toda a informação que estava lá é apagada
+//Para modificar isso comente a linha indicada no arquivo ActionInitialization.cc
+
 //arquivo onde as informaões dos elétrons são salvas
 std::ofstream eFile ("e-out.txt",std::ofstream::app);
 
