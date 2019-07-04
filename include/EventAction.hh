@@ -1,0 +1,26 @@
+#ifndef EventAction_h
+#define EventAction_h 1
+
+
+#include "G4UserEventAction.hh"
+#include "globals.hh"
+
+/// Event action
+
+class EventAction : public G4UserEventAction
+{
+public:
+    EventAction();
+    virtual ~EventAction();
+
+    virtual void BeginOfEventAction(const G4Event*);
+    virtual void EndOfEventAction(const G4Event*);
+
+private:
+    G4int fHHC1ID;
+    G4int fHHC2ID;
+};
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+#endif

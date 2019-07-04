@@ -1,0 +1,47 @@
+/run/initialize
+
+########################################
+#
+# scoring depois da placa
+#
+/score/create/boxMesh box
+/score/mesh/boxSize 5. 5. 0.000001 m
+/score/mesh/translate/xyz 0 0 0.0002 m
+/score/mesh/nBin 1 1 1
+#---------------------------
+#scoring antes da placa
+# /score/create/boxMesh boxzmenos
+# /score/mesh/boxSize 5. 5. -0.0000025 m
+# /score/mesh/translate/xyz 0 0 -0.2 m
+# /score/mesh/nBin 1 1 1
+
+#filtros e quantidades coletadas
+
+/score/quantity/population nAlpha
+/score/filter/particle FiltroAlpha alpha
+/score/quantity/population  nNeutron
+/score/filter/particle FiltroNeutron neutron
+
+
+
+
+
+#
+/score/list
+
+/vis/disable
+/run/verbose 2
+/gun/particle neutron
+/gun/energy 0.04180 eV
+#/gun/energy 0.025 MeV
+#/gun/energy 10 MeV
+/run/beamOn 1000000
+/vis/enable
+
+########################################
+#
+#/score/dumpQuantityToFile box eDep energy.txt
+#Salvando todos os scores
+/score/dumpAllQuantitiesToFile box energy.txt
+#/score/dumpAllQuantitiesToFile boxzmais nantes.txt
+#/control/execute draw.mac

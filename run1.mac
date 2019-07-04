@@ -1,0 +1,14 @@
+# Macro file for example tutorial
+# 
+# Can be run in batch, without graphic
+# or interactively: Idle> /control/execute run1.mac
+#
+# Defaults:
+# armAngle 30. deg
+# field value: 1.0*tesla
+/run/verbose 1
+/run/numberOfThreads 4
+/run/initialize
+/run/beamOn 100 
+#
+
