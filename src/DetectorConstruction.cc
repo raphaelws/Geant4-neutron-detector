@@ -174,9 +174,9 @@ G4double delta=(0.5*sd_sizeZ+0.5*b10plate_sizeZ);
 
     //O MUNDO
      G4VisAttributes* visAttributes = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
-    //    visAttributes->SetVisibility(true);
-    //    worldLogical->SetVisAttributes(visAttributes);
-    //    fVisAttributes.push_back(visAttributes);
+       visAttributes->SetVisibility(false);
+       worldLogical->SetVisAttributes(visAttributes);
+       fVisAttributes.push_back(visAttributes);
 
     //SD de elétrons
     visAttributes = new G4VisAttributes(G4Colour(0.8888,0.0,0.0));
