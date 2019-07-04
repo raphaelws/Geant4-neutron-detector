@@ -62,11 +62,23 @@ DetectorConstruction::~DetectorConstruction()
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
+
+    G4double fractionmass, density;
+    G4int ncomponents;
+    G4String symbol, name;
     // Materiais
     ConstructMaterials();
     G4Material* air = G4Material::GetMaterial("G4_AIR");
     G4Material* vacuum = G4Material::GetMaterial("G4_Galactic");
     G4Material* argonGas = G4Material::GetMaterial("G4_Ar");
+    G4Material* co2 = G4Material::GetMaterial("G4_CARBON_DIOXIDE");
+
+    //Mistura de gás 70% Ar e 30% CO2
+    //Não está funcionando por enquanto
+    // density = 0.0018419*g/cm3;
+    // G4Material* Arco2 = new G4Material(name="Arco2", density, ncomponents=2);
+    // Arco2->AddMaterial(co2, fractionmass= 30.*perCent);
+    // Arco2->AddMaterial(argonGas, fractionmass= 70.*perCent);
 
     //isotopo de B10
     //----------Jeito que eu defini o B10-------------------
@@ -121,7 +133,7 @@ G4double delta=(0.5*sd_sizeZ+0.5*b10plate_sizeZ);
 //usei essa variavel para definir o ponto onde ia colocar o detector, mas não uso ela mais
 G4double colocandoZ2 = b10plate_sizeZ;
 
-//fazendo
+//fazendo o SD de elétrons
     G4VSolid* eletron1Solid
       = new G4Box("eletron1Box",0.5*sd_sizeX,0.5*sd_sizeY,0.5*sd_sizeZ);
     fEletron1Logical
