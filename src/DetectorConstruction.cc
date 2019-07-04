@@ -63,15 +63,15 @@ DetectorConstruction::~DetectorConstruction()
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
 
-    G4double fractionmass, density;
-    G4int ncomponents;
-    G4String symbol, name;
+    // G4double fractionmass, density;
+    // G4int ncomponents;
+    // G4String symbol, name;
     // Materiais
     ConstructMaterials();
     G4Material* air = G4Material::GetMaterial("G4_AIR");
-    G4Material* vacuum = G4Material::GetMaterial("G4_Galactic");
+    // G4Material* vacuum = G4Material::GetMaterial("G4_Galactic");
     G4Material* argonGas = G4Material::GetMaterial("G4_Ar");
-    G4Material* co2 = G4Material::GetMaterial("G4_CARBON_DIOXIDE");
+    // G4Material* co2 = G4Material::GetMaterial("G4_CARBON_DIOXIDE");
 
     //Mistura de gás 70% Ar e 30% CO2
     //Não está funcionando por enquanto
@@ -131,7 +131,7 @@ G4double delta=(0.5*sd_sizeZ+0.5*b10plate_sizeZ);
 
 
 //usei essa variavel para definir o ponto onde ia colocar o detector, mas não uso ela mais
-G4double colocandoZ2 = b10plate_sizeZ;
+// G4double colocandoZ2 = b10plate_sizeZ;
 
 //fazendo o SD de elétrons
     G4VSolid* eletron1Solid
@@ -149,7 +149,7 @@ G4double colocandoZ2 = b10plate_sizeZ;
 
 
 
-                        G4double colocandoZ = (-world_sizeZ+(5*b10plate_sizeZ));
+                        // G4double colocandoZ = (-world_sizeZ+(5*b10plate_sizeZ));
 
 
       G4VSolid* b10Solid
@@ -216,9 +216,9 @@ void DetectorConstruction::ConstructMaterials()
     //testando se o meu erro não foi definidir o B10 aqui
     //Caso de errado comente o código e pergunte como fazer na próxima reunião ************************LEMBRETE***********************************
 
-    G4Material* el_b10  = new G4Material("B10", 5.,10.013*g/mole, 2.34*g/cm3);
-
-    nistManager->FindOrBuildMaterial("el_b10");
+    // G4Material* el_b10  = new G4Material("B10", 5.,10.013*g/mole, 2.34*g/cm3);
+    //
+    // nistManager->FindOrBuildMaterial("el_b10");
     //------------------------------------------------------
 
     // Air
