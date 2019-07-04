@@ -82,3 +82,7 @@
 /gui/addButton viewer "Flush viewer (= refresh + update)" "/vis/viewer/flush"
 /gui/addButton viewer "Update scene" "/vis/scene/notifyHandlers"
 /gui/addIcon "Run beam on" user_icon "/run/beamOn 1" run.png
+/run/beamOn 100
+/vis/scene/notifyHandlers scene-0
+/gun/particle alpha
+/run/beamOn 100

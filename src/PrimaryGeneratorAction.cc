@@ -54,7 +54,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   // G4ParticleDefinition* particle
   //   = particleTable->FindParticle(particleName="alpha");
   G4ParticleDefinition* particle
-    = particleTable->FindParticle(particleName="eletron");
+    = particleTable->FindParticle(particleName="neutron");
   fParticleGun->SetParticleDefinition(particle);
 
   // particle direction: +Z
