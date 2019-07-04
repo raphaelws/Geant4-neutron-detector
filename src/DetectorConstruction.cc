@@ -178,12 +178,12 @@ G4double delta=(0.5*sd_sizeZ+0.5*b10plate_sizeZ);
        worldLogical->SetVisAttributes(visAttributes);
        fVisAttributes.push_back(visAttributes);
 
-    //SD de elétrons
+    //SD de elétrons vermelho
     visAttributes = new G4VisAttributes(G4Colour(0.8888,0.0,0.0));
     fEletron1Logical->SetVisAttributes(visAttributes);
         fVisAttributes.push_back(visAttributes);
 
-    //Placa de B10
+    //Placa de B10 verde
     visAttributes = new G4VisAttributes(G4Colour(0.9,0.9,0.0));
     visAttributes->SetVisibility(true);
     b10Logical->SetVisAttributes(visAttributes);
