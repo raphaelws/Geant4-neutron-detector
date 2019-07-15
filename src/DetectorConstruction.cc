@@ -69,7 +69,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // Materiais
     ConstructMaterials();
     G4Material* air = G4Material::GetMaterial("G4_AIR");
-    // G4Material* vacuum = G4Material::GetMaterial("G4_Galactic");
+    G4Material* vacuum = G4Material::GetMaterial("G4_Galactic");
     G4Material* argonGas = G4Material::GetMaterial("G4_Ar");
     // G4Material* co2 = G4Material::GetMaterial("G4_CARBON_DIOXIDE");
 
@@ -82,7 +82,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     //isotopo de B10
     //----------Jeito que eu defini o B10-------------------
-    G4Material* el_b10  = new G4Material("B10", 5.,10.013*g/mole, 2.34*g/cm3);
+    // G4Material* el_b10  = new G4Material("B10", 5.,10.013*g/mole, 2.34*g/cm3);
     //---------------------------------------------------
 
     //-----------------Jeito que o Renan definiu---------------
@@ -92,6 +92,16 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // G4Material* boron_layer_material = new G4Material("B10",2.34*g/cm3,1);
     // boron_layer_material->AddElement(el_b10,1);
     //------------------------------------------------------------------
+    // Construct materials
+ ConstructMaterials();
+ //Jeito que eu defini o B10
+ //G4Material* el_b10  = new G4Material("B10", 5.,10.013*g/mole, 2.34*g/cm3);
+ //Jeito que o Renan definiu o B10
+ G4Isotope* isoB10 = new G4Isotope("B10", 5, 10, 10.012937*g/mole);
+  G4Element* el_b10 = new G4Element("elementB10","B10",1);
+  el_b10->AddIsotope(isoB10,100*perCent);
+  G4Material* boron_layer_material = new G4Material("B10",2.34*g/cm3,1);
+  boron_layer_material->AddElement(el_b10,1);
 
     G4bool checkOverlaps = true;
 
@@ -99,16 +109,27 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4double world_sizeX=1.*m;
     G4double world_sizeY=1.*m;
     G4double world_sizeZ=1.*m;
+   //
+   //  G4VSolid* worldSolid
+   //   = new G4Box("worldBox",0.5*world_sizeX, 0.5*world_sizeY, 0.5*world_sizeZ);
+   // G4LogicalVolume* worldLogical
+   //   = new G4LogicalVolume(worldSolid,vacuum,"worldLogical");
+   // G4VPhysicalVolume* worldPhysical
+   //   = new G4PVPlacement(0,G4ThreeVector(),worldLogical,"worldPhysical",0,
+   //                       false,0,checkOverlaps);
 
-    G4VSolid* worldSolid
-     = new G4Box("worldBox",0.5*world_sizeX, 0.5*world_sizeY, 0.5*world_sizeZ);
-   G4LogicalVolume* worldLogical
-     = new G4LogicalVolume(worldSolid,air,"worldLogical");
-   G4VPhysicalVolume* worldPhysical
-     = new G4PVPlacement(0,G4ThreeVector(),worldLogical,"worldPhysical",0,
-                         false,0,checkOverlaps);
 
+   // G4double world_sizeX=10.*m;
+   //     G4double world_sizeY=10.*m;
+   //     G4double world_sizeZ=10.*m;
 
+       G4VSolid* worldSolid
+         = new G4Box("worldBox",0.5*world_sizeX, 0.5*world_sizeY, 0.5*world_sizeZ);
+       G4LogicalVolume* worldLogical
+         = new G4LogicalVolume(worldSolid,argonGas,"worldLogical");
+       G4VPhysicalVolume* worldPhysical
+         = new G4PVPlacement(0,G4ThreeVector(),worldLogical,"worldPhysical",0,
+                             false,0,checkOverlaps);
 
 //dimensões da placa de B10
 G4double b10plate_sizeX=1.*m;
@@ -128,6 +149,22 @@ G4double delta=(0.5*sd_sizeZ+0.5*b10plate_sizeZ);
 //não me lembro pra que serve esse delta e tenho medo de deletar
 // G4double sd_sizeZ=(world_sizeZ-b10plate_sizeZ);
 // G4double delta=(sd_sizeZ+b10plate_sizeZ);
+// B10 Plate
+// G4double b10plate_sizeX=10.*m;
+// G4double b10plate_sizeY=10.*m;
+// G4double b10plate_sizeZ=0.000004*m;
+
+
+G4VSolid* b10Solid
+  = new G4Box("b10Solid",0.5*b10plate_sizeX, 0.5*b10plate_sizeY, 0.5*b10plate_sizeZ);
+// Definido com o meu B10
+//G4LogicalVolume* b10Logical
+//  = new G4LogicalVolume(b10Solid,el_b10,"b10Logical");
+// Definido com o B10 do Renan
+G4LogicalVolume* b10Logical = new G4LogicalVolume(b10Solid,boron_layer_material,"b10Logical");
+new G4PVPlacement(0,G4ThreeVector(0.,0.,0.),b10Logical,
+                  "b10Physical",worldLogical,
+                  false,0,checkOverlaps);
 
 
 //usei essa variavel para definir o ponto onde ia colocar o detector, mas não uso ela mais
@@ -152,20 +189,20 @@ G4double delta=(0.5*sd_sizeZ+0.5*b10plate_sizeZ);
                         // G4double colocandoZ = (-world_sizeZ+(5*b10plate_sizeZ));
 
 
-      G4VSolid* b10Solid
-      = new G4Box("b10Solid",0.5*b10plate_sizeX, 0.5*b10plate_sizeY, 0.5*b10plate_sizeZ);
-      // Definido com o meu B10
-      //--------------------------
-      G4LogicalVolume* b10Logical
-      = new G4LogicalVolume(b10Solid,el_b10,"b10Logical");
-      //------------------- Comente caso for usar o do Renan
-      // Definido com o B10 do Renan
-      //------------------------------
-      // G4LogicalVolume* b10Logical = new G4LogicalVolume(b10Solid,boron_layer_material,"b10Logical");
-      // Descomente caso for usar o do Renan
-      new G4PVPlacement(0,G4ThreeVector(0.,0.,0.),b10Logical,
-      "b10Physical",worldLogical,
-       false,0,checkOverlaps);
+      // G4VSolid* b10Solid
+      // = new G4Box("b10Solid",0.5*b10plate_sizeX, 0.5*b10plate_sizeY, 0.5*b10plate_sizeZ);
+      // // Definido com o meu B10
+      // //--------------------------
+      // G4LogicalVolume* b10Logical
+      // = new G4LogicalVolume(b10Solid,el_b10,"b10Logical");
+      // //------------------- Comente caso for usar o do Renan
+      // // Definido com o B10 do Renan
+      // //------------------------------
+      // // G4LogicalVolume* b10Logical = new G4LogicalVolume(b10Solid,boron_layer_material,"b10Logical");
+      // // Descomente caso for usar o do Renan
+      // new G4PVPlacement(0,G4ThreeVector(0.,0.,0.),b10Logical,
+      // "b10Physical",worldLogical,
+      //  false,0,checkOverlaps);
 
 
 
@@ -178,7 +215,7 @@ G4double delta=(0.5*sd_sizeZ+0.5*b10plate_sizeZ);
        worldLogical->SetVisAttributes(visAttributes);
        fVisAttributes.push_back(visAttributes);
 
-    //SD de elétrons vermelho
+    // SD de elétrons vermelho
     visAttributes = new G4VisAttributes(G4Colour(0.8888,0.0,0.0));
     fEletron1Logical->SetVisAttributes(visAttributes);
         fVisAttributes.push_back(visAttributes);
@@ -197,7 +234,7 @@ G4double delta=(0.5*sd_sizeZ+0.5*b10plate_sizeZ);
  //
  void DetectorConstruction::ConstructSDandField()
 	 {
-	  //----------------------------sensitive detector de eletrons -----------------------------------------------------
+	//   //----------------------------sensitive detector de eletrons -----------------------------------------------------
 	  G4SDManager* SDman = G4SDManager::GetSDMpointer();
 	  G4String SDname;
 
@@ -205,7 +242,7 @@ G4double delta=(0.5*sd_sizeZ+0.5*b10plate_sizeZ);
 	  SDman->AddNewDetector(eletron1);
 	  fEletron1Logical->SetSensitiveDetector(eletron1);
 
-	  // Register the field and its manager for deleting
+	//   // Register the field and its manager for deleting
 	  }
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

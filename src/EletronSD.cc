@@ -61,14 +61,14 @@ for (size_t lp=0; lp<(*secondary).size(); lp++) {
         G4ThreeVector momento =(*secondary)[lp]->GetMomentum();
         G4ThreeVector worldPos = (*secondary)[lp]->GetPosition();
         //Linha para ver no arquivo se eletrons não estavam sendo produzidos por outros eletrons
-        //eFile << name << " " << nome << "\n";
+        eFile << name << " " << nome << "\n";
         //no momento estou pegando TODOS os elétrons apenas para testar
         //caso necessário, é fácil pedir pra ver se o parent track é uma alpha ou um lítio
         if (name=="e-" && nome!= "e-")
         {eFile << worldPos << " " << momento << "\n";
 
       }
-         else {step->GetTrack()->SetTrackStatus(fStopAndKill);}
+       if (nome=="e-") {step->GetTrack()->SetTrackStatus(fStopAndKill);}
 
 }
 
