@@ -65,7 +65,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   // G4double posX = -0.*m;
   // fParticleGun->SetParticlePosition(G4ThreeVector(posX,posY,0.5*m));
 
-    // fParticleGun->SetParticleEnergy(0.04180*eV);
+     fParticleGun->SetParticleEnergy(0.04180*eV);
     //fParticleGun->SetParticleEnergy(50.*eV);
 }
 

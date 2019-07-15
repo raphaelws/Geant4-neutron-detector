@@ -85,4 +85,4 @@
 /tracking/verbose 1
 /run/beamOn 10
 /vis/scene/notifyHandlers scene-0
-/run/beamOn 1000
+/run/beamOn 10
